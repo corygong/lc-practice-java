@@ -125,7 +125,7 @@ public class Solution {
 	 * @param array
 	 * @return
 	 */
-	public int InversePairs(int[] array){
+	public static int InversePairs(int[] array){
 		if(array==null ||array.length<0){
 			return 0;
 		}
@@ -134,7 +134,7 @@ public class Solution {
 		int pairNum=InversePairs(array,copy,0,array.length-1);
 		return pairNum;
 	}
-	public int InversePairs(int[] array,int[] copy,int begin,int end){
+	public static int InversePairs(int[] array,int[] copy,int begin,int end){
 		if(begin == end){
 			return 0;
 		}
@@ -160,6 +160,61 @@ public class Solution {
 		}
 		return left+right+count;
 	}
+	
+	public static void main(String[] args) {
+		int[] tes ={7,5,1,6,4};
+		System.out.println(InversePairs(tes));
+	}
+	
+	/**
+	 * A树是否包含B树
+	 * @param root1
+	 * @param root2
+	 * @return
+	 */
+	public boolean HasSubTree(TreeNode root1,TreeNode root2){
+		boolean result=false;
+		if(root1!=null && root2!=null){
+			if(root1.val==root2.val){
+				result=DoesAHasB(root1, root2);
+			}
+			if(!result){
+				result=HasSubTree(root1.left, root2);
+			}
+			if(!result){
+				result=HasSubTree(root1.right, root2);
+			}
+			
+		}
+		return result;
+	}
+	public boolean DoesAHasB(TreeNode root1,TreeNode root2){
+		if(root2==null) return true;
+		if(root1==null) return false;
+		if(root1.val!=root2.val){
+			return false;
+		}
+		return DoesAHasB(root1.left, root2.left) && DoesAHasB(root1.right, root2.right);
+	}
+	
+	/*public ArrayList<Integer> printMatrix(int[][] matrix){
+		
+	}*/
+	
+	/**
+	 * 二叉树深度
+	 * @param root
+	 * @return
+	 */
+	public int TreeDepth(TreeNode root) {
+        if(root==null){
+            return 0;
+        }else{
+            return 1+((TreeDepth(root.left)>TreeDepth(root.right))?TreeDepth(root.left):TreeDepth(root.right));
+        }  
+    }
+	
+	
 	
 	
 	
