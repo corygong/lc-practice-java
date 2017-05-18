@@ -1,6 +1,6 @@
 package mySwordOffer;
 
-import java.util.*；
+import java.util.*;
 
 /**
  * 剑指offer上的66道算法题
@@ -59,15 +59,33 @@ public class Solution {
 			
 		}
 		//return result;
+		return null;
 	}
 	
 	//6、重建二叉树
 	
 	public TreeNode reConstructBinaryTree(int[] pre,int[] in){
+		return null;
 		
 	}
 	
 	//7、用两个栈实现队列
+	
+	Stack<Integer> stack1=new Stack<Integer>();
+	Stack<Integer> stack2=new Stack<Integer>();
+	
+	public void push(int node){
+		stack1.push(node);
+	}
+	public int pop(){
+		while(!stack2.isEmpty()){
+			return stack2.pop();
+		}
+		while(!stack1.isEmpty()){
+			stack2.push(stack1.pop());
+		}
+		return stack2.pop();
+	}
 	
 	//8、旋转数组的最小数字
 	
@@ -147,7 +165,25 @@ public class Solution {
 		
 	}
 	//15、链表中倒数第k个结点
-	
+	public ListNode FindKthToTail(ListNode head,int k){
+		if(head==null || k==0){
+			return null;
+		}
+		ListNode fast=head;
+		ListNode slow=head;
+		for(int i=1;i<k;i++){
+			if(fast.next!=null){
+				fast=fast.next;
+			}else{
+				return null;
+			}
+		}
+		while(fast.next!=null){
+			fast=fast.next;
+			slow=slow.next.next;
+		}
+		return slow;
+	}
 	
 	//16、翻转链表
 	public ListNode ReverseList(ListNode head){
@@ -263,6 +299,34 @@ public class Solution {
 	//33\把数组排成最小的数
 	
 	//34、丑数
+	
+	public int getUglyNumber(int index){
+		if(index<=0)
+			return 0;
+		int num=0;
+		int uglyFound=0;
+		while(uglyFound<index){
+			num++;
+			if(isUgly(num)){
+				uglyFound++;
+			}
+			
+		}
+		
+		return num;
+	}
+	public boolean isUgly(int num){
+		while(num%2==0){
+			num/=2;
+		}
+		while(num%3==0){
+			num/=3;
+		}
+		while(num%5==0){
+			num/=5;
+		}
+		return (num==1)?true:false;
+	}
 	
 	//35、第一个只出现一次的字符
 	
